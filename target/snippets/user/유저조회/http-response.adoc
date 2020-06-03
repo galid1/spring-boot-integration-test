@@ -2,7 +2,9 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 19
+Content-Length: 25
 
-{"userName":"TEST"}
+{
+  "userName" : "TEST"
+}
 ----

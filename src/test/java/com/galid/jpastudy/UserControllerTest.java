@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -34,6 +35,8 @@ class UserControllerTest extends BaseIntegrationTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andDo(document("user/{method-name}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("userName").description("유저의 이름")
                         ),
@@ -59,6 +62,7 @@ class UserControllerTest extends BaseIntegrationTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andDo(document("user/{method-name}",
+                        preprocessResponse(prettyPrint()),
                         responseFields(
                                 fieldWithPath("userName").description("유저 이름")
                         )
@@ -83,6 +87,7 @@ class UserControllerTest extends BaseIntegrationTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andDo(document("user/{method-name}",
+                        preprocessResponse(prettyPrint()),
                         responseFields(
                                 fieldWithPath("userList[].userName").description("유저 이름")
                         )

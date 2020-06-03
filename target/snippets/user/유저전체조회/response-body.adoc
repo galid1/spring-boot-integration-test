@@ -1,4 +1,10 @@
 [source,options="nowrap"]
 ----
-{"userList":[{"userName":"TEST1"},{"userName":"TEST2"}]}
+{
+  "userList" : [ {
+    "userName" : "TEST1"
+  }, {
+    "userName" : "TEST2"
+  } ]
+}
 ----
