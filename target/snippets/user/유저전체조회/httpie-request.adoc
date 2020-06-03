@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost/users' \
+    'Accept:application/json'
+----

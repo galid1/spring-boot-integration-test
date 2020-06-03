@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+userId+`
+|`+Number+`
+|Database 상의 user_id
+
+|===

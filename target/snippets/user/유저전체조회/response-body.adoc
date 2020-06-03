@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+{"userList":[{"userName":"TEST1"},{"userName":"TEST2"}]}
+----

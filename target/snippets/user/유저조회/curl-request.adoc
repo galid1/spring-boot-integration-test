@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost/users/1' -i -X GET \
+    -H 'Accept: application/json'
+----

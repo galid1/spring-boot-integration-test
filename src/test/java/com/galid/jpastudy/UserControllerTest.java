@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,7 +32,15 @@ class UserControllerTest extends BaseIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(createRequest))
                 .accept(MediaType.APPLICATION_JSON))
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("user/{method-name}",
+                        requestFields(
+                                fieldWithPath("userName").description("유저의 이름")
+                        ),
+                        responseFields(
+                                fieldWithPath("userId").description("Database 상의 user_id")
+                        )
+                ));
 
         //then
         resultActions
@@ -47,7 +57,12 @@ class UserControllerTest extends BaseIntegrationTest {
         //when
         ResultActions resultActions = mvc.perform(get("/users/{userId}", USER_ID)
                 .accept(MediaType.APPLICATION_JSON))
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("user/{method-name}",
+                        responseFields(
+                                fieldWithPath("userName").description("유저 이름")
+                        )
+                ));
 
         //then
         resultActions
@@ -66,7 +81,12 @@ class UserControllerTest extends BaseIntegrationTest {
         //when
         ResultActions resultActions = mvc.perform(get("/users")
                 .accept(MediaType.APPLICATION_JSON))
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("user/{method-name}",
+                        responseFields(
+                                fieldWithPath("userList[].userName").description("유저 이름")
+                        )
+                ));
 
         //then
         resultActions
